@@ -19,3 +19,18 @@ __Texto em negrito__
 *Texto em itálico*
 _Texto em itálico_
 
+Use `git status` to list all new or modified files that haven't yet been committed.
+
+Some basic Git commands are:
+```
+git status
+git add
+git commit
+```
+
+
+
+
+
+
+
