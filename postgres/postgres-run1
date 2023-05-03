@@ -1,0 +1,9 @@
+docker container run -d -p 5434:5432 --name pg-atuapp -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=brasilia -e POSTGRES_DB=atuacao postgres
+
+
+docker cp backup_postgresql_05_05_2022_UTF8 92f9:/
+
+docker exec 92f9 pg_restore -U postgres -d atuacao -1 backup_postgresql_05_05_2022_UTF8
+
+
+
