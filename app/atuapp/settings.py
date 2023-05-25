@@ -23,6 +23,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-5yl&d7c+a40a%e0ajj$z_gdh375-5jn$i3q93(v$2&hs4^!$2h'
 
+#SECRET_KEY = APP_SECRET_KEY
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -79,41 +81,13 @@ WSGI_APPLICATION = 'atuapp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-"""
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-"""
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'atuacao', 
-        'USER': 'postgres',
-        'PASSWORD': 'brasilia', 
-        'HOST': 'localhost', 
-        'PORT': '5434',
-    }
-}
-
-
-"""
-DATABASES = {
-    'default': {
-        'ENGINE': 'mssql',
-        'NAME': 'PGU_ESTATISTICA',
-        'USER': 'SVC_PGU_ATUACAO_WEB',
-        'PASSWORD': 'QS07O$nCFFD5*uJegaZ',
-        'HOST': '10.207.112.5',
-        'PORT': '1433',
-        "OPTIONS": {"driver": "ODBC Driver 17 for SQL Server", 
-        },
-    },
-}
-"""
 
 
 # Password validation

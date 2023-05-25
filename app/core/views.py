@@ -1,25 +1,127 @@
 from django.shortcuts import render
-from datetime import datetime, date
+#from datetime import datetime, date
 from django.contrib import messages
 
 from django.http import HttpResponse
-
-from .models import Teste, Tribunais, T01Processo,	T02TipoCalculo, T03Instancia, T04OrigemProcesso,\
-					T05SituacaoUniaoProcesso, T06TipoParecer, T07ObjetoAcao, T08OrgaoRepresentado,\
-					T09Necap, T14ResponsavelProcesso
 
 from src.dbld_sql_queries import * 
 from src.dbld_constantes import *  
 from src.dbld_conexao import *  
 from src.dbld_sqlserver import *
+from src.dbld_consulta_tabelas_sql_server import *
+
+#from src.configura_debug import *
+
+def entradadados(request):
+	
+	contexto = {}
+	instancia={}
+	origemprocesso={}
+	tipocalculo={}
+	objetoacao={}
+	unidade={}
+
+	"""seleciona o código e a descrição das tabelas do SQLServer"""
+	instancia = SQLData.selecionaColunas('03',0,1)
+	origemprocesso = SQLData.selecionaColunas('04',0,4)
+	tipocalculo = SQLData.selecionaColunas('02',0,1)
+	objetoacao = SQLData.selecionaColunas('07',0,1)
+	unidade = SQLData.selecionaColunas('09',0,1)
+	responsavel = SQLData.selecionaColunas('14',0,1)
+
+	if request.method == "POST":
+		
+		lista_registros = []	
+		valores = dict(request.POST.items())
+
+		print("------valores--------")
+		print(valores)
+		print("---------------------")
+		
+		for valor in valores.values():
+			lista_registros.append(valor)
+			
+		print("----lista_registros antes----")
+		print(lista_registros)
+		
+		lista_regs_formatada = SQLData.formatarListaRegistros(
+								lista_registros,
+								instancia,
+								origemprocesso,
+								tipocalculo,
+								objetoacao,
+								unidade,
+								valores)
+
+		sql_id = insertRegistroSQL(lista_regs_formatada)
+
+		registro = SQLData.selecionaRegistro(sql_id, "id")
+
+		print(registro)
+
+		 
+
+		"""
+
+		
+		sql_id = insertRegistroSQL(lista_registros)
+
+		# buscar o registro que foi gravado para visualização
+		registro = selectRegistroSQL(sql_id, "id")
+
+		instancia = T03Instancia.objects.get(t03_id_instancia =registro[4])
+		orgaorepresentado = T08OrgaoRepresentado.objects.get(t08_id_orgao_representado =registro[5])
+		origem = T04OrigemProcesso.objects.get(t04_id_unidade=registro[6])
+		situacaouniao = "Ré" if registro[7]==1 else "Autora"
+		tipocalculo = T02TipoCalculo.objects.get(t02_id_tipo_calculo =registro[8])
+		objetoacao = T07ObjetoAcao.objects.get(t07_id_objeto_acao =registro[9])
+		tipoparecer = T06TipoParecer.objects.get(t06_id_tipo_parecer =registro[10])
+		necap = T09Necap.objects.get(t09_id_necap =registro[23])	
+
+		return render(request, 'teste.html', {'valores':valores})
+
+		
+		#msg = 'Registro inserido com sucesso!'  
+		#messages.success (request, (msg))
+		#return render(request, 'teste.html', context=contexto)
+		)"""
+
+		return render(request, 'entradadados.html', {'valores':valores})
+
+	else:
+	
+		contexto['instancia']=instancia
+		contexto['origemprocesso'] = origemprocesso
+		contexto['tipocalculo']=tipocalculo
+		contexto['objetoacao']=objetoacao
+		#contexto['orgaorepresentado']=orgaorepresentado
+		contexto['unidade']=unidade
+		contexto['responsavel']=responsavel
+				
+		return render(request, 'entradadados.html', context=contexto)
+
+
+def teste(request):	
+	return render(request, 'teste.html',{})
+
+def teste2(request):
+	if request.method == "POST":
+		
+		valores = dict(request.POST.items())
+
+		print("valores recebidos")
+		print(valores)		
+
+	return render(request, 'teste2.html',{'valores':valores})
+
 
 def home(request):
 	first_name = "DCP"
 	last_name = "Brasília-DF"
 	return render(request,'home.html',{})
 
-
-def entradadados(request):
+"""
+def entradadadosX(request):
 
 	lista_instancia =[]
 	lista_origemprocesso = []
@@ -30,16 +132,19 @@ def entradadados(request):
 	lista_tipoparecer = []
 
 	if request.method == "POST":
-
 		
 		lista_registros = []
 		
 		valores = dict(request.POST.items())
+		print(valores)
 		for valor in valores.values():
 			lista_registros.append(valor)
-			#print(valor)
+			print(valor)
 		
-		lista_registros.remove(lista_registros[0])	
+		lista_registros.remove(lista_registros[0])
+		
+		print("===== lista_registros =======")
+		print(lista_registros)	
 		
 		lista_registros[0]= "2" if lista_registros[0] == "Autora" else "1"
 		 
@@ -159,7 +264,7 @@ def entradadados(request):
 													'necap':lista_unidade,
 													'responsavelprocesso':responsavelprocesso
 													})
-
+"""
 
 def consulta(request):
 
@@ -180,51 +285,7 @@ def consulta(request):
 
 		registro = selectRegistroSQL(valor, tipo)		 
 
-		if registro:
-			instancia = ''
-			if registro[4]:
-				instancia = T03Instancia.objects.get(t03_id_instancia =registro[4])
-
-			orgaorepresentado = ''			
-			if registro[5]:
-				orgaorepresentado = T08OrgaoRepresentado.objects.get(t08_id_orgao_representado =registro[5])
-			
-			
-			if registro[6]:
-				origem = T04OrigemProcesso.objects.get(t04_id_unidade=registro[6])
-
-			situacaouniao = "Ré" if registro[7]==1 else "Autora"			
-			
-			tipocalculo = ''
-			if registro[8]:
-				tipocalculo = T02TipoCalculo.objects.get(t02_id_tipo_calculo =registro[8])			
-			
-			objetoacao = ''
-			if registro[9]:
-				objetoacao = T07ObjetoAcao.objects.get(t07_id_objeto_acao =registro[9])			
-			
-			tipoparecer = ''
-			if registro[10]:
-				tipoparecer = T06TipoParecer.objects.get(t06_id_tipo_parecer =registro[10])			
-			
-			necap = 'Não Informado'			
-			if registro[23]:
-				necap = T09Necap.objects.get(t09_id_necap =registro[23])
-
-
-			return render(request,'consulta.html',{'registro':registro, 
-													'instancia':instancia,
-													'orgaorepresentado':orgaorepresentado,
-													'origem':origem,
-													'situacaouniao':situacaouniao,
-													'tipocalculo':tipocalculo,
-													'objetoacao':objetoacao,
-													'tipoparecer':tipoparecer,
-													'necap':necap
-													})
-		else:
-			messages.success (request, "Registro não encontrado")
-
+		
 
 	return render(request,'consulta.html',{})
 

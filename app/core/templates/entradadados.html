@@ -52,11 +52,7 @@
 				<td>INSTÂNCIA</td>
 	            <td>{{instancia}}</td>                          
 	          </tr>
-	           <tr>
-				<td>ÓRGÃO REPRESENTADO</td>
-	            <td>{{orgaorepresentado}}</td>                          
-	          </tr>
-	           <tr>
+	          <tr>
 				<td>ORIGEM DO PROCESSO</td>
 	            <td>{{origem}}</td>                          
 	          </tr>           
@@ -73,10 +69,6 @@
 	            <td>{{objetoacao}}</td>                          
 	          </tr>  
 	          <tr>
-				<td>TIPO DE PARECER</td>
-	            <td>{{tipoparecer}}</td>                          
-	          </tr>  
-	          <tr>
 				<td>NÚMERO PARECER</td>
 	            <td>{{registro.11}}</td>                          
 	          </tr>  
@@ -89,19 +81,13 @@
 	            <td>{{registro.13 |floatformat:"2g"}}</td>                          
 	          </tr>  
 	          <tr>
-				<td>DATA ENVIO NECAP</td>
+				<td>DATA ENVIO PARA UNIDADE</td>
 	            <td>{{registro.14 |date:"SHORT_DATE_FORMAT" }}</td>                          
 	          </tr>  
+	          
+	            
 	          <tr>
-				<td>PRAZO ADVOGADO</td>
-	            <td>{{registro.15 |date:"SHORT_DATE_FORMAT"}}</td>                          
-	          </tr>  
-	          <tr>
-				<td>DATA RECEMBIMENTO TÉCNICO</td>
-	            <td>{{registro.16 |date:"SHORT_DATE_FORMAT"}}</td>                          
-	          </tr>  
-	          <tr>
-				<td>DATA SAÍDA NECAP</td>
+				<td>DATA SAÍDA</td>
 	            <td>{{registro.17 |date:"SHORT_DATE_FORMAT"}}</td>                          
 	          </tr>  
 	          <tr>
@@ -112,18 +98,12 @@
 				<td>NOME DO RESPONSÁVEL</td>
 	            <td>{{registro.19}}</td>                          
 	          </tr>  
-	          <tr>
-				<td>PERÍCIA</td>
-	            <td>{{registro.20}}</td>                          
-	          </tr>  
+	           
 	          <tr>
 				<td>DATA INSERÇÃO DOS DADOS</td>
 	            <td>{{registro.21 |date:"SHORT_DATE_FORMAT"}}</td>                          
 	          </tr>  
-	          <tr>
-				<td>NUM. AÇÃO ORIGINAL</td>
-	            <td>{% if registro.22 %} {{registro.22}} {% endif %}</td>                          
-	          </tr>  
+	            
 	          <tr>
 				<td>UNIDADE</td>
 	            <td>{{necap}}</td>                          
@@ -163,17 +143,7 @@
 
 	  			<div class="row"> <!-- 1a linha -->
 
-			  		<!--
-			  		<div class="col-sm-2">					  		
-						<label for="datalist1" class="form-label"><h6>Situação da União</h6></label>
-						<input onchange="inabValorAutor(situacao.value);" class="form-control" list="listasituacaouniao" id="datalist1" placeholder="Escolha..." name='situacao' required>
-						<datalist id="listasituacaouniao">								
-							<option value="Ré" >
-							<option value="Autora">
-						</datalist>
-					</div> -->
-
-					<div class="col-sm-2">
+			  		<div class="col-sm-2">
 						    <label for="selecao1"><h6>Situação da União</h6></label>
 						    <select class="form-control" id="selecao1" onchange="inabValorAutor(situacao.value);" name="situacao" required>
 						      <option value=""></option>
@@ -182,15 +152,7 @@
 						    </select>
 					</div>
 
-					<div class="col-sm-2">					  		
-						<label for="selecao2" class="form-label"><h6>Tipo de Atividade</h6></label>
-						<select class="form-control" id="selecao2" name='atividade' required>
-						    <option value=""></option>								
-							<option value="Cálculo">Cálculo</option>
-							<option value="Perícia">Perícia</option>
-						</select>
-					</div>
-
+					
 					<div class="col-sm-5">					  
 						   	<label for="numpro" class="form-label"><h6>Nº do processo</h6></label>
 						   	<input type="text" onkeypress="return event.charCode >= 48 && event.charCode <=57" class="form-control" id="numpro" name="numprocesso" maxlength="30" required>	    
@@ -201,62 +163,32 @@
 				
 
 				<div class="row"> <!-- 2a linha -->
-						<!--
-						<div class="col-sm-2">					  
-					    	<label for="campo2" class="form-label">Ano</label>
-					    	<input type="number" class="form-control" id="campo2" name='ano' >	    
-						</div>	
-						-->					
-
+						
 						<div class="col-sm-7">					  
-					    	<label for="nomexeq" class="form-label"><h6>Nome do exequente</h6></label>
+					    	<label for="nomexeq" class="form-label"><h6>Nome do autor</h6></label>
 					    	<input type="text" class="form-control" id="nomexeq" name="exequente" maxlength="70" onchange="upperCase();" required>	    
 					  	</div>
 
-					  	<!--
-					  	<div class="col-sm-2">
-					    	<label for="datalist4" class="form-label"><h6>Instância</h6></label>
-							<input class="form-control" list="listaInstancia" id="datalist4" placeholder="Escolha..." name="instancia" required>
-								<datalist id="listaInstancia">
-									{% if instancia %}
-										{% for k in instancia %}
-										   <option value="{{ k }}">
-										{% endfor %}
-									{% endif %}									
-								</datalist>
-						</div> -->
-
+					  	
 						<div class="col-sm-2">
 					    	<label for="selecao3" class="form-label"><h6>Instância</h6></label>
 							<select class="form-control" id="selecao3" name="instancia" required>
 								<option></option>
 									{% if instancia %}
-										{% for k in instancia %}
+										{% for k in instancia.values %}
 										   <option value="{{ k }}">{{ k }}</option>
 										{% endfor %}
 									{% endif %}									
 							</select>
 						</div>
 
-						<!--
-						<div class="col-sm-2">
-							<label for="datalist5" class="form-label"><h6>Origem do processo</h6></label>
-							<input class="form-control" list="listaOrigemProcesso" id="datalist5" placeholder="Escolha..." name='origemprocesso' required>
-								<datalist id="listaOrigemProcesso">
-									{% if origemprocesso %}
-										{% for k in origemprocesso %}
-									   		<option value="{{ k }}">
-										{% endfor %}
-									{% endif %}		
-								</datalist>	
-						</div> -->
-
+						
 						<div class="col-sm-2">
 							<label for="selecao4" class="form-label"><h6>Origem do processo</h6></label>
 							<select class="form-control" id="selecao4" name='origemprocesso' required>
 								<option></option>
 									{% if origemprocesso %}
-										{% for k in origemprocesso %}
+										{% for k in origemprocesso.values %}
 									   		<option value="{{ k }}">{{ k }}</option>
 										{% endfor %}
 									{% endif %}		
@@ -270,55 +202,28 @@
 					<div class="row"> <!-- 3a linha -->
 					
 						<div class="col-sm-2">
-							<label for="cmp1" class="form-label"><h6>Qte de exequentes</h6></label>
+							<label for="cmp1" class="form-label"><h6>Quant de Exequentes</h6></label>
 						    <input type="number" class="form-control" id="cmp1" name="qtexeq" onchange="validaQtdExeq(qtexeq.value);" onkeypress="return event.charCode >= 48 && event.charCode <=57" required>	    
 						</div>
-
-						<!--
-						<div class="col-sm-4">
-							<label for="datalist6" class="form-label"><h6>Tipo de cálculo</h6></label>
-							<input class="form-control" list="listaTipoCalculo" id="datalist6" placeholder="Escolha..." name="tipocalculo" required>
-							<datalist id="listaTipoCalculo">
-								{% if tipocalculo %}
-									{% for k in tipocalculo %}
-									   <option value="{{ k }}">
-									{% endfor %}
-								{% endif %}							
-							</datalist>	
-						</div> -->
-
 
 						<div class="col-sm-4">
 							<label for="selecao5" class="form-label"><h6>Tipo de cálculo</h6></label>
 							<select class="form-control" id="selecao5" name="tipocalculo" required>
 								<option></option>
 								{% if tipocalculo %}
-									{% for k in tipocalculo %}
+									{% for k in tipocalculo.values %}
 									   <option value="{{ k }}">{{ k }}</option>
 									{% endfor %}
 								{% endif %}							
 							</select>	
 						</div>
 
-						<!--
-						<div class="col-sm-6"> 					   		
-						   		<label for="exampleDataList" class="form-label"><h6>Objeto da ação</h6></label>
-								<input class="form-control" list="listaObjetoAcao" id="exampleDataList" placeholder="Escolha..." name="objeto" required>
-								<datalist id="listaObjetoAcao">
-									{% if objetoacao %}
-										{% for k in objetoacao %}
-										   <option value="{{ k }}">
-										{% endfor %}
-									{% endif %}								
-								</datalist>	
-						</div> -->
-
 						<div class="col-sm-6"> 					   		
 						   		<label for="selecao6" class="form-label"><h6>Objeto da ação</h6></label>
 								<select class="form-control" id="selecao6" name="objeto" required>
 									<option></option>
 									{% if objetoacao %}
-										{% for k in objetoacao %}
+										{% for k in objetoacao.values %}
 										   <option value="{{ k }}">{{ k }}</option>
 										{% endfor %}
 									{% endif %}								
@@ -329,89 +234,20 @@
 					</div> <!-- 3a linha -->
 				
 
-					<div class="row"> <!-- 4a linha -->
-						
-						<!--
-						<div class="col-sm-6">
-								<label for="exampleDataList" class="form-label"><h6>Orgão representado</h6></label>
-								<input class="form-control" list="listaOrgaoRepre" id="exampleDataList" placeholder="Escolha..." name="orgao" required>
-								<datalist id="listaOrgaoRepre">
-									{% if orgaorepresentado %}
-										{% for k in orgaorepresentado %}
-										   <option value="{{ k }}">
-										{% endfor %}
-									{% endif %}								
-								</datalist>	
-						</div>
+					<div class="row"> <!-- 4a linha -->	
 
-						
-						<div class="col-sm-3"> 
-							   	<label for="exampleDataList" class="form-label"><h6>Unidade</h6></label>
-								<input class="form-control" list="listaUnidade" id="exampleDataList" placeholder="Escolha..." name="unidade" required>
-								<datalist id="listaUnidade">
-									{% if necap %}
-										{% for k in necap %}
-										   <option value="{{ k }}">
-										{% endfor %}
-									{% endif %}							
-								</datalist>	
-						</div> -->
-			
-						<div class="col-sm-6">
-								<label for="selecao7" class="form-label"><h6>Orgão representado</h6></label>
-								<select class="form-control" id="selecao7" name="orgao" required>
-									<option></option>
-									{% if orgaorepresentado %}
-										{% for k in orgaorepresentado %}
-										   <option value="{{ k }}">{{ k }}</option>
-										{% endfor %}
-									{% endif %}								
-								</select>	
-						</div> 
-
-						
 						<div class="col-sm-3"> 
 							   	<label for="selecao8" class="form-label"><h6>Unidade</h6></label>
 								<select class="form-control" id="selecao8" name="unidade" required>
 									<option></option>
-									{% if necap %}
-										{% for k in necap %}
+									{% if unidade %}
+										{% for k in unidade.values %}
 										   <option value="{{ k }}">{{ k }}</option>
 										{% endfor %}
 									{% endif %}							
 								</select>	
 						</div>
 
-						<!--
-						<div class="col-sm-3">					  		
-							<label for="dataList3" class="form-label"><h6>Tipo de parecer</h6></label>
-							<input class="form-control" list="listaTipoParecer" id="datalist3" placeholder="Escolha..." name="tipoparecer" required>
-								<datalist id="listaTipoParecer">
-									{% if tipoparecer %}
-										{% for k in tipoparecer %}
-										   <option value="{{ k }}">
-										{% endfor %}
-									{% endif %}	
-								</datalist>
-						</div> -->
-
-						<div class="col-sm-3">					  		
-							<label for="selecao9" class="form-label"><h6>Tipo de parecer</h6></label>
-							<select class="form-control" id="selecao9" name="tipoparecer" required>
-								<option></option>
-									{% if tipoparecer %}
-										{% for k in tipoparecer %}
-										   <option value="{{ k }}">{{ k }}</option>
-										{% endfor %}
-									{% endif %}	
-							</select>
-						</div>
-
-					</div> <!-- 4a linha -->
-				
-
-					<div class="row"> <!-- 5a linha -->
-												
 						<div class="col-sm-3">
 					    	<label for="campo4" class="form-label"><h6>Nº do parecer</h6></label>
 					    	<input type="text" class="form-control" id="campo4" name="numparecer" maxlength="20"required>
@@ -427,18 +263,14 @@
 						    <input type="float" class="form-control" id="campo8" name="valorautor" onchange="doDecimal(valorautor.value,'campo8'); return false;" required>	    
 						</div>
 
+					</div> <!-- 4a linha -->
+				
+
+					<div class="row"> <!-- 5a linha -->		
+
 						<div class="col-sm-3">
 							<label for="campo2" class="form-label"><h6>Data de envio p/ unidade</h6></label>
 						    <input type="date" class="form-control" id="dtenvio" name="dataenvio" required>	    
-						</div>
-
-					</div> <!-- 5a linha -->
-				
-					<div class="row"> <!-- 6a linha -->							
-
-						<div class="col-sm-3">
-							<label for="campo3" class="form-label"><h6>Prazo do Advogado</h6></label>
-						   	<input type="date" class="form-control" id="dtadvoga" name="dataadvogado" onfocusout="valida1();" required>
 						</div>
 
 						<div class="col-sm-3">				    	
@@ -446,35 +278,23 @@
 						    <input type="date" class="form-control" id="dtsaida" name="datasaida" onfocusout="valida2();" required>
 						</div>
 
-						<!--
 						<div class="col-sm-6">
-						   	<label for="exampleDataList" class="form-label"><h6>Nome do responsável</h6></label>
-							<input class="form-control" list="listaNomeResp" id="exampleDataList" placeholder="Escolha..." name="responsavel" maxlength="70" required>
-							<datalist id="listaNomeResp">
-								{% if responsavelprocesso %}
-									{% for k in responsavelprocesso %}
-									   <option value="{{ k }}">
-									{% endfor %}
-								{% endif %}	
-							</datalist>	
-						</div> -->
-
-						<div class="col-sm-6">
-						   	<label for="selecao10" class="form-label"><h6>Nome do responsável</h6></label>
-							<select class="form-control" id="selecao10" name="responsavel" maxlength="70" required>
-								<option></option>
-								{% if responsavelprocesso %}
-									{% for k in responsavelprocesso %}
-									   <option value="{{ k }}">{{ k }}</option>
-									{% endfor %}
-								{% endif %}	
-							</select>	
-						</div>
+							<label for="selecao10" class="form-label"><h6>Nome do responsável</h6></label>
+						 <select class="form-control" id="selecao10" name="responsavel" maxlength="70" required>
+							 <option></option>
+							 {% if responsavel %}
+								 {% for k in responsavel.values %}
+									<option value="{{ k }}">{{ k }}</option>
+								 {% endfor %}
+							 {% endif %}	
+						 </select>	
+					 	</div>
 
 					</div> <!-- 5a linha -->
 				
+								
 
-					<div class="row">
+					<div class="row"> <!-- 6a linha -->
 						<div class="col-sm-12">					  
 					    	<label for="campo2" class="form-label"><h6>Observação</h6></label>
 					    	<textarea class="form-control" id="campo2" name="observacao"placeholder="Registre aqui alguma observação sobre o processo." maxlength="200"></textarea>
@@ -482,7 +302,7 @@
 					</div>
 				
 
-					<div class="row">
+					<div class="row"> <!-- 7a linha-->
 						<div class="col-sm-12">
 							<button type="submit" class="btn btn-primary mt-3">Gravar Informações</button>
 						</div>

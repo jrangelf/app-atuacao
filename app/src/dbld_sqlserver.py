@@ -7,7 +7,7 @@ def selectRegistroSQL(valor,tipo):
 	debug ("============ selectRegistroSQL =================")
 	_regs = []
 
-	con1 = conecta_db_sqlserver(servidor1,banco1,usuario1,senha1)
+	con1 = conecta_db_sqlserver(SQL_SERVER,SQL_DB,SQL_USER,SQL_PASSWORD)
 	cursor1 = con1.cursor()
 
 	query = eval('query_select_registro_sql_' + tipo)
@@ -28,7 +28,7 @@ def selectRegistroSQL(valor,tipo):
 
 def insertRegistroSQL(record_to_insert):
 
-    con1 = conecta_db_sqlserver(servidor1,banco1,usuario1,senha1)
+    con1 = conecta_db_sqlserver(SQL_SERVER,SQL_DB,SQL_USER,SQL_PASSWORD)
     cursor1 = con1.cursor()
 
     record_to_insert[13] = record_to_insert[13].replace('.','')

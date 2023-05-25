@@ -33,19 +33,19 @@ function inabcampo2()
 }
 
 
-function valida1()
-{	
-	dt1=document.getElementById("dtenvio").value;
-	dt2=document.getElementById("dtadvoga").value;
+//function valida1()
+//{	
+//	dt1=document.getElementById("dtenvio").value;
+//	dt2=document.getElementById("dtadvoga").value;
 
-	if (dt1 > dt2)
-	{
-	    alert("A data do prazo do advogado não pode ser menor que a data de envio.");
-	    document.getElementById("dtadvoga").value = "";
-	    document.getElementById("dtenvio").focus();
+//	if (dt1 > dt2)
+//	{
+//	    alert("A data do prazo do advogado não pode ser menor que a data de envio.");
+//	    document.getElementById("dtadvoga").value = "";
+//	    document.getElementById("dtenvio").focus();
 
-	}
-}
+//	}
+//}
 
 
 function valida2()

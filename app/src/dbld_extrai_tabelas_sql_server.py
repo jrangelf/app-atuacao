@@ -3,7 +3,7 @@ from dbld_constantes import *
 from dbld_conexao import *  
 
 
-con1 = conecta_db_sqlserver(servidor1,banco1,usuario1,senha1)
+con1 = conecta_db_sqlserver(SQL_SERVER,SQL_DB,SQL_USER,SQL_PASSWORD)
 cursor1 = con1.cursor()
 
 
