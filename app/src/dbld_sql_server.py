@@ -213,7 +213,7 @@ class SQLData():
         self.regs.remove(self.regs[0])		
         self.regs[0]= '2' if self.regs[0] == 'Autora' else '1'		
 		
-		# fixar em N - Cálculo
+	# fixar em N - Cálculo
         self.regs.insert(1,'N')		
 		
         cod_instancia = getKeyByValue(self.instancia, self.valores['instancia'])
@@ -225,16 +225,16 @@ class SQLData():
         cod_objeto_acao = getKeyByValue(self.objetoacao, self.valores['objeto'])
         self.regs[8]=int(cod_objeto_acao)		
 		
-		# fixar em 1 - Advocacia-Geral da União
+	# fixar em 1 - Advocacia-Geral da União
         self.regs.insert(9,1)		
 		
         cod_unidade = getKeyByValue(self.unidade, self.valores['unidade'])
         self.regs[10] = int(cod_unidade)
 		
-		# com a desterritorialização somente há um tipo de parecer (conclusivo)
+	# com a desterritorialização somente há um tipo de parecer (conclusivo)
         self.regs.insert(11,1)
 
-		# inserir nulo para o prazo do advogado
+	# inserir nulo para o prazo do advogado
         self.regs.insert(16,None)
 
         data_atual = date.today()
