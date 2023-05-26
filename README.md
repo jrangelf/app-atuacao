@@ -1,4 +1,6 @@
 # Atuação Web
+O aplicativo web é utilizado para substituir a gravação de dados em um banco SQL Server por meio do Microsoft Access.
+
 # Cabeçalho de nível 1
 ## Cabeçalho de nível 2
 ### Cabeçalho de nível 3
