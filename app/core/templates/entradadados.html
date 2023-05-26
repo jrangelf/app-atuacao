@@ -74,11 +74,11 @@
 	          </tr>  
 	          <tr>
 				<td>VALOR UNIÃO</td>
-	            <td>{{registro.12 |floatformat:"2g"}}</td>                          
+	            <td>{{registro.13 |floatformat:"2g"}}</td>                          
 	          </tr>  
 	          <tr>
 				<td>VALOR AUTOR</td>
-	            <td>{{registro.13 |floatformat:"2g"}}</td>                          
+	            <td>{{registro.12 |floatformat:"2g"}}</td>                          
 	          </tr>  
 	          <tr>
 				<td>DATA ENVIO PARA UNIDADE</td>
@@ -124,6 +124,9 @@
 {% else %}
 
 	<!-- <h5>Entrada de Dados</h5> -->
+	
+	
+	
 	<hr/>		
 		
 		<!-- <script type="text/javascript">javascript:window.history.forward(1);</script> -->
@@ -154,7 +157,7 @@
 
 					
 					<div class="col-sm-5">					  
-						   	<label for="numpro" class="form-label"><h6>Nº do processo</h6></label>
+						   	<label for="numpro" class="form-label"><abbr title="O número do processo deve possuir 20 caracteres"><h6>Nº do processo</h6></abbr></label>
 						   	<input type="text" onkeypress="return event.charCode >= 48 && event.charCode <=57" class="form-control" id="numpro" name="numprocesso" maxlength="30" required>	    
 					</div>
 
@@ -163,7 +166,7 @@
 				
 
 				<div class="row"> <!-- 2a linha -->
-						
+					
 						<div class="col-sm-7">					  
 					    	<label for="nomexeq" class="form-label"><h6>Nome do autor</h6></label>
 					    	<input type="text" class="form-control" id="nomexeq" name="exequente" maxlength="70" onchange="upperCase();" required>	    
@@ -254,13 +257,13 @@
 					  	</div>
 					  	
 					  	<div class="col-sm-3">
-							<label for="campo9" class="form-label"><h6>Valor da União</h6></label>
-						   	<input type="float" class="form-control" id="campo9" name="valoruniao" onchange="doDecimal(valoruniao.value,'campo9'); return false;" required>
+							<label for="campo9" class="form-label"><h6>Valor do Autor</h6></label>
+						   	<input type="float" class="form-control" id="campo9" name="valorautor" onchange="doDecimal(valorautor.value,'campo9'); return false;" required>
 						</div>
 
 					  	<div class="col-sm-3">
-							<label for="campo8" class="form-label"><h6>Valor do Autor</h6></label>
-						    <input type="float" class="form-control" id="campo8" name="valorautor" onchange="doDecimal(valorautor.value,'campo8'); return false;" required>	    
+							<label for="campo8" class="form-label"><h6>Valor da União</h6></label>
+						    <input type="float" class="form-control" id="campo8" name="valoruniao" onchange="doDecimal(valoruniao.value,'campo8'); return false;" required>	    
 						</div>
 
 					</div> <!-- 4a linha -->

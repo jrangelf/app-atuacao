@@ -1,3 +1,4 @@
 dockerfile.app
 docker-compose.yml
 dockerfile
+.dockerignore

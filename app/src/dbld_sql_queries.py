@@ -93,11 +93,6 @@ FROM dbo.T13_FINANCEIRO_ACORDO
 """
 
 
-#query_select_t14 = """
-#SELECT T14_COD_NECAP,T14_NOME_RESPONSAVEL \
-#FROM dbo.T14_RESPONSAVEL_PROCESSO
-#"""
-
 query_select_t14 = """
 SELECT T14_COD_NECAP,T14_NOME_RESPONSAVEL \
 FROM dbo.T14_RESPONSAVEL_PROCESSO \
@@ -154,17 +149,15 @@ FROM dbo.T21_COMBINACAO_POSSIVEL_PROCESSO
 
 query_sql_count = 'SELECT count(T01_ID_PROCESSO) FROM dbo.T01_PROCESSO'
 
-query_postgres_count = 'select count("T01_ID_PROCESSO") from core_t01processo'
-
 query_select_sqlserver = "SELECT TOP @ * FROM dbo.T01_PROCESSO ORDER BY T01_ID_PROCESSO DESC"
-
-query_select_postgres = 'SELECT TOP @ * FROM core_t01processo ORDER BY "T01_ID_PROCESSO" DESC'
 
 query_select_registro_sql_numproc = "SELECT * FROM dbo.T01_PROCESSO WHERE [T01_NUM_PROCESSO] = '@' "
 
 #query_select_registro_sql_id = "SELECT * FROM dbo.T01_PROCESSO WHERE [T01_ID_PROCESSO] = @"
-
 query_select_registro_sql_id = "SELECT * FROM dbo.T25_PROCESSO_TESTE WHERE [T01_ID_PROCESSO] = @"
+
+#query_registro_inserido_sql_id = """SELECT [T01_ID_PROCESSO] FROM dbo.T01_PROCESSO WHERE [T01_NUM_PROCESSO] = '@' \
+# AND [T01_NUM_PARECER] ='$'  AND [T01_NOME_RESPONSAVEL] = '%' AND [T01_DESC_NECAP] = '^' """
 
 query_registro_inserido_sql_id = """SELECT [T01_ID_PROCESSO] FROM dbo.T25_PROCESSO_TESTE WHERE [T01_NUM_PROCESSO] = '@' \
  AND [T01_NUM_PARECER] ='$'  AND [T01_NOME_RESPONSAVEL] = '%' AND [T01_DESC_NECAP] = '^' """
