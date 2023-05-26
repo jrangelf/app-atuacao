@@ -81,28 +81,17 @@ class SQLData():
             NUM ACAO ORIGINARIA(22)
             COD DESC NECAP(23)"""
         
-        debug ("============ selecionaRegistro =================")
-        
         self.valor = str(valor)
         self.tipo = tipo
         query = eval('query_select_registro_sql_' + self.tipo)
         str_query = query.replace('@', self.valor)
         
-        debug('--------queries-------')
-        debug(query)
-        debug(str_query)
-
         con = SQLData.conexao()
         cursor = con.cursor()
         cursor.execute(str_query)
-        row = cursor.fetchone()
-        
-        debug('------row_sql--------')
-        debug(row)
-
-        debug ("==================================================")
-
+        row = cursor.fetchone()                
         con.close()
+	
         return row
 
     
@@ -122,44 +111,22 @@ class SQLData():
 
         self.record[13] = self.record[13].replace(',','.')
         self.record[14] = self.record[14].replace(',','.')
-
-        debug ("(1)------record_to_insert---------------")
-        debug(self.record)
         
         _records = tuple(self.record)
 
-        debug("(2)-------tuple(record_to_insert)--------")
-        debug(_records)
-        debug("(3)----query_insert_registro_sqlserver-----")
-        debug(query_insert_registro_sqlserver)
-
         con = SQLData.conexao()
         cursor = con.cursor()
-
         cursor.execute(query_insert_registro_sqlserver, _records)
-        con.commit()
-               
-        debug("(4)-------registro inserido--------")
-        debug("(1)---buscar o id do registro no banco sqlserver------")
+        con.commit()              
 
         str_query = query_registro_inserido_sql_id.replace('@',str(self.record[2]))
         str_query = str_query.replace('$',str(self.record[12]))
         str_query = str_query.replace('%',str(self.record[18]))
         str_query = str_query.replace('^',str(self.record[10]))  
-
-        debug("(2)-----query de busca--------------")
-        debug (str_query)
-
+        
         cursor.execute(str_query)	
         row_sqlid = cursor.fetchone()
-    
-        debug("(3)-----registro inserido--------")
-        debug(row_sqlid)
-
         id_processo = row_sqlid[0]
-
-        debug("(4)----id_processo------------")
-        debug (id_processo)
         con.close()
 
         return id_processo
